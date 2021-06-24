@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 
 import styled from 'styled-components';
+import * as EmailValidator from 'email-validator';
+
+import { auth } from '../util/firebase';
 
 function SignIn() {
 
@@ -9,14 +12,31 @@ function SignIn() {
     const [errFlag, setErrFlag] = useState(false);
     const [errMessage, setErrMessage] = useState('');
 
+    const handleSignIn = (e) => {
+        if(email !== '' && password !== '' && EmailValidator.validate(email)) {
+            auth.signInWithEmailAndPassword(email, password)
+            .catch((err) => {
+                console.log(err);
+            })
+        } else {
+            setErrFlag(true);
+            setErrMessage('Error');
+        }
+    }
+
+    const handleErrorClick = () => {
+        setErrFlag(false);
+        setErrMessage('');
+    }
+
     return (
-        <form>
-            <ErrorMessage>{errFlag ? errMessage : ''}</ErrorMessage>
+        <form onSubmit={(e) => handleSignIn(e)}>
+            <ErrorMessage onClick={handleErrorClick}>{errFlag ? errMessage : ''}</ErrorMessage>
             <label htmlFor="">Email:</label>
             <input placeholder="Email Address..." type="text" onChange={(e) => setEmail(e.target.value)} />
             <label htmlFor="">Password:</label>
             <input placeholder="Password..." type="password" name="" id="" onChange={(e) => setPassword(e.target.value)} />
-            <button type="submit">Sign In</button>
+            <button type="submit" onClick={(e) => handleSignIn(e)}>Sign In</button>
         </form>
     )
 }

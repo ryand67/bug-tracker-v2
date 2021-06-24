@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 function App() {
 
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
 
   return (
     <div className="App">
