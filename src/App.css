@@ -7,3 +7,13 @@
   justify-content: center;
   align-items: center;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+form * {
+  margin: .25rem 0;
+}

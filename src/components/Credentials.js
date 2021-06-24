@@ -9,6 +9,7 @@ function Credentials() {
 
     return (
         <div>
+            {signInFlag ? <SignIn /> : <SignUp />}
             <button onClick={() => setSignInFlag(!signInFlag)}>{signInFlag ? 'Have an account? Sign In' : "Don't have an account? Sign Up"}</button>
         </div>
     )
