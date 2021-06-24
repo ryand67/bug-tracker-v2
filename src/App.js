@@ -3,6 +3,7 @@ import './App.css';
 import Home from './components/Home';
 import Credentials from './components/Credentials';
 import Nav from './components/Nav';
+import NewPostForm from './components/NewPostForm';
 
 import { auth } from './util/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -20,6 +21,10 @@ function App() {
         <Switch>
           <Route exact path='/'>
             {user ? <Home /> : <Credentials />}
+          </Route>
+          
+          <Route exact path='/new-bug'>
+            {user ? <NewPostForm /> : () => window.location.replace('/')}
           </Route>
         </Switch>
       </Router>

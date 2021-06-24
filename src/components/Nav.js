@@ -12,7 +12,7 @@ function Nav() {
                 <button>Home</button>
             </Link>
 
-            <Link to='/create-bug'>
+            <Link to='/new-bug'>
                 <button>New Bug</button>
             </Link>
 
