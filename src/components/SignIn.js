@@ -13,6 +13,7 @@ function SignIn() {
     const [errMessage, setErrMessage] = useState('');
 
     const handleSignIn = (e) => {
+        e.preventDefault();
         if(email !== '' && password !== '' && EmailValidator.validate(email)) {
             auth.signInWithEmailAndPassword(email, password)
             .catch((err) => {
