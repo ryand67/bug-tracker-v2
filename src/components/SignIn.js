@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import styled from 'styled-components';
+
 function SignIn() {
 
     const [email, setEmail] = useState('');
@@ -9,6 +11,7 @@ function SignIn() {
 
     return (
         <form>
+            <ErrorMessage>{errFlag ? errMessage : ''}</ErrorMessage>
             <label htmlFor="">Email:</label>
             <input placeholder="Email Address..." type="text" onChange={(e) => setEmail(e.target.value)} />
             <label htmlFor="">Password:</label>
@@ -17,5 +20,9 @@ function SignIn() {
         </form>
     )
 }
+
+const ErrorMessage = styled.p`
+    color: red;
+`;
 
 export default SignIn
