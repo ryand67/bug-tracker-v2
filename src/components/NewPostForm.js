@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import { db } from '../util/firebase';
+
 function NewPostForm() {
 
     const [dueDate, setDueDate] = useState('');
@@ -7,8 +9,12 @@ function NewPostForm() {
     const [category, setCategory] = useState('');
     const [status, setStatus] = useState('');
 
+    const handlePostSubmit = (e) => {
+        e.preventDefault();
+    }
+
     return (
-        <form>
+        <form onSubmit={(e) => handlePostSubmit(e)}>
             <label htmlFor="">Due Date:</label>
             <input type="date" name="" id="" onChange={(e) => setDueDate(e.target.value)} />
             <label htmlFor="">Bug Description:</label>
@@ -25,7 +31,7 @@ function NewPostForm() {
                 <option value="Completed">Completed</option>
                 <option value="Unassigned">Unassigned</option>
             </select>
-            <button type="submit">Submit Bug</button>
+            <button type="submit" onClick={(e) => handlePostSubmit(e)}>Submit Bug</button>
         </form>
     )
 }

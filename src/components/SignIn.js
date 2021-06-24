@@ -14,7 +14,7 @@ function SignIn() {
 
     const handleSignIn = (e) => {
         e.preventDefault();
-        if(email !== '' && password !== '' && EmailValidator.validate(email)) {
+        if(email && password && EmailValidator.validate(email)) {
             auth.signInWithEmailAndPassword(email, password)
             .catch((err) => {
                 console.log(err);

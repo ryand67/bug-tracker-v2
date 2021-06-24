@@ -16,7 +16,7 @@ function SignUp() {
 
     const handleSignUp = (e) => {
         e.preventDefault();
-        if(password === passConfirm && name !== '' && email !== '' && password !== '' && EmailValidator.validate(email)) {
+        if(password === passConfirm && name && email && password && EmailValidator.validate(email)) {
             db.collection('users').add({name, email}).then((res) => {
                 auth.createUserWithEmailAndPassword(email, password).then(() => {
                     auth.signInWithEmailAndPassword(email, password);
