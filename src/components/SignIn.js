@@ -10,9 +10,9 @@ function SignIn() {
     return (
         <form>
             <label htmlFor="">Email:</label>
-            <input type="text" onChange={(e) => setEmail(e.target.value)} />
+            <input placeholder="Email Address..." type="text" onChange={(e) => setEmail(e.target.value)} />
             <label htmlFor="">Password:</label>
-            <input type="password" name="" id="" onChange={(e) => setPassword(e.target.value)} />
+            <input placeholder="Password..." type="password" name="" id="" onChange={(e) => setPassword(e.target.value)} />
             <button type="submit">Sign In</button>
         </form>
     )

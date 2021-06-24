@@ -16,7 +16,9 @@ function SignUp() {
     const handleSignUp = () => {
         if(password === passConfirm && name !== '' && email !== '' && password !== '') {
             db.collection('users').add({name, email}).then((res) => {
-
+                auth.createUserWithEmailAndPassword(email, password).then(() => {
+                    auth.signInWithEmailAndPassword(email, password);
+                })
             })
             .catch((err) => {
                 console.log(err);
@@ -38,13 +40,13 @@ function SignUp() {
         <form>
             <ErrorMessage onClick={resetError}>{errFlag ? errMessage : null}</ErrorMessage>
             <label htmlFor="">Name:</label>
-            <input type="text" onChange={(e) => setName(e.target.value)} />
+            <input placeholder="Name..." type="text" onChange={(e) => setName(e.target.value)} />
             <label htmlFor="">Email:</label>
-            <input type="text" onChange={(e) => setEmail(e.target.value)} />
+            <input placeholder="Email Address..." type="text" onChange={(e) => setEmail(e.target.value)} />
             <label htmlFor="">Password:</label>
-            <input type="password" onChange={(e) => setPassword(e.target.value)} />
+            <input placeholder="Password..." type="password" onChange={(e) => setPassword(e.target.value)} />
             <label htmlFor="">Confirm Password:</label>
-            <input type="password" onChange={(e) => setPassConfirm(e.target.value)} />
+            <input placeholder="Confirm Password..." type="password" onChange={(e) => setPassConfirm(e.target.value)} />
             <button type="submit" onClick={() => handleSignUp()}>Sign Up</button>
         </form>
     )
