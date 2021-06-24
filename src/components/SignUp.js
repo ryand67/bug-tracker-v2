@@ -8,7 +8,7 @@ function SignUp() {
     const [passConfirm, setPassConfirm] = useState('');
 
     return (
-        <div>
+        <form>
             <label htmlFor="">Name:</label>
             <input type="text" onChange={(e) => setName(e.target.value)} />
             <label htmlFor="">Email:</label>
@@ -17,7 +17,7 @@ function SignUp() {
             <input type="password" onChange={(e) => setPassword(e.target.value)} />
             <label htmlFor="">Confirm Password:</label>
             <input type="password" onChange={(e) => setPassConfirm(e.target.value)} />
-        </div>
+        </form>
     )
 }
 

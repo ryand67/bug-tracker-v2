@@ -2,10 +2,11 @@ import './App.css';
 
 import Home from './components/Home';
 import Credentials from './components/Credentials';
+import Nav from './components/Nav';
 
 import { auth } from './util/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 function App() {
 
@@ -13,7 +14,15 @@ function App() {
 
   return (
     <div className="App">
-      {user ? <Home /> : <Credentials />}
+      <Router>
+        <Nav />
+
+        <Switch>
+          <Route exact path='/'>
+            {user ? <Home /> : <Credentials />}
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
