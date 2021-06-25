@@ -14,17 +14,31 @@ function NewPostForm() {
     //Form states
     const [dueDate, setDueDate] = useState('');
     const [bugDesc, setBugDesc] = useState('');
-    const [category, setCategory] = useState('');
-    const [status, setStatus] = useState('');
+    const [category, setCategory] = useState('Development');
+    const [status, setStatus] = useState('In Progress');
+    const [assignee, setAssignee] = useState('Not Assigned');
 
     //Firestore retrieved states
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
 
+    //Array of possible employees to assign to
+    const [assignees, setAssignees] = useState([])
+
     useEffect(() => {
         db.collection('users').where('email', '==', user.email).get().then((res) => {
             setEmail(user.email);
             setName(res.docs[0].data().name)
+        })
+        db.collection('users').get().then(res => {
+            const holderArray = ['Not Assigned'];
+            res.forEach(doc => {
+                holderArray.push(doc.data().name);
+            })
+            setAssignees(holderArray);
+        })
+        .catch(err => {
+            console.log(err);
         })
     }, [])
 
@@ -37,14 +51,18 @@ function NewPostForm() {
                 status,
                 category,
                 date: `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`,
-                name,
-                email
+                authorName: name,
+                authorEmail: email,
+                assignee
             }).then(res => {
                 console.log(res);
+                window.location.replace('/');
             })
             .catch(err => {
                 console.log(err);
             })
+        } else {
+            console.log('asdf');
         }
     }
 
@@ -65,6 +83,13 @@ function NewPostForm() {
                 <option value="In Progress">In Progress</option>
                 <option value="Completed">Completed</option>
                 <option value="Unassigned">Unassigned</option>
+                <option value="Assigned">Assigned</option>
+            </select>
+            <label htmlFor="">Assignee:</label>
+            <select name="" id="" onChange={e => setAssignee(e.target.value)}>
+                {assignees.map(item => {
+                    return <option key={item} value={item}>{item}</option>
+                })}
             </select>
             <button type="submit" onClick={(e) => handlePostSubmit(e)}>Submit Bug</button>
         </form>
