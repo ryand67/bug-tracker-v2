@@ -1,16 +1,51 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-import { db } from '../util/firebase';
+import { db, auth } from '../util/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { setCacheNameDetails } from 'workbox-core';
+import { current } from 'immer';
 
 function NewPostForm() {
 
+    const [user] = useAuthState(auth);
+
+    const currentDate = new Date();
+
+    //Form states
     const [dueDate, setDueDate] = useState('');
     const [bugDesc, setBugDesc] = useState('');
     const [category, setCategory] = useState('');
     const [status, setStatus] = useState('');
 
+    //Firestore retrieved states
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+
+    useEffect(() => {
+        db.collection('users').where('email', '==', user.email).get().then((res) => {
+            setEmail(user.email);
+            setName(res.docs[0].data().name)
+        })
+    }, [])
+
     const handlePostSubmit = (e) => {
         e.preventDefault();
+        if(dueDate && bugDesc && category && status) {
+            db.collection('bugs').add({
+                dueDate,
+                bugDesc,
+                status,
+                category,
+                date: `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`,
+                name,
+                email
+            }).then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
     }
 
     return (
