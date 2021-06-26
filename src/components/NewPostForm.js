@@ -17,6 +17,7 @@ function NewPostForm() {
     const [category, setCategory] = useState('Development');
     const [status, setStatus] = useState('In Progress');
     const [assignee, setAssignee] = useState('Not Assigned');
+    const [title, setTitle] = useState('');
 
     //Firestore retrieved states
     const [name, setName] = useState('');
@@ -44,8 +45,9 @@ function NewPostForm() {
 
     const handlePostSubmit = (e) => {
         e.preventDefault();
-        if(dueDate && bugDesc && category && status) {
+        if(dueDate && bugDesc && category && status && title) {
             db.collection('bugs').add({
+                title,
                 dueDate,
                 bugDesc,
                 status,
@@ -68,6 +70,8 @@ function NewPostForm() {
 
     return (
         <form onSubmit={(e) => handlePostSubmit(e)}>
+            <label>Title:</label>
+            <input type="text" onChange={(e) => setTitle(e.target.value)} />
             <label htmlFor="">Due Date:</label>
             <input type="date" name="" id="" onChange={(e) => setDueDate(e.target.value)} />
             <label htmlFor="">Bug Description:</label>
