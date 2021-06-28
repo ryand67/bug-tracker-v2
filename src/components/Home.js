@@ -9,6 +9,23 @@ function Home() {
 
     const [bugs, setBugs] = useState([]);
 
+    const fetchBugs = () => {
+        let holder = [];
+        db.collection('bugs').get().then(res => {
+            res.docs.forEach(item => {
+                holder.push(item.data());
+            })
+        })
+        .then(() => {
+            console.log(holder);
+            setBugs(holder);
+        })
+    }
+
+    useEffect(() => {
+        fetchBugs();
+    }, [])
+
     return (
         <div>
             asdfasdf
