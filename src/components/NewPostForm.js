@@ -70,7 +70,7 @@ function NewPostForm() {
 
     return (
         <form onSubmit={(e) => handlePostSubmit(e)}>
-            <label>Title:</label>
+            <label>Bug Title:</label>
             <input type="text" onChange={(e) => setTitle(e.target.value)} />
             <label htmlFor="">Due Date:</label>
             <input type="date" name="" id="" onChange={(e) => setDueDate(e.target.value)} />
