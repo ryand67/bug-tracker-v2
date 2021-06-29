@@ -5,6 +5,7 @@ import Credentials from './components/Credentials';
 import Nav from './components/Nav';
 import NewPostForm from './components/NewPostForm';
 import MyBugs from './components/MyBugs';
+import BugPage from './components/BugPage';
 
 import { auth } from './util/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -30,6 +31,10 @@ function App() {
 
           <Route exact path='/my-bugs'>
             <MyBugs />
+          </Route>
+
+          <Route exact path="/bug/:id">
+            <BugPage />
           </Route>
         </Switch>
       </Router>

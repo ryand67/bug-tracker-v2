@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 function BugCard({props}) {
     
@@ -6,7 +7,7 @@ function BugCard({props}) {
 
     return (
         <tr>
-            <td>{id}</td>
+            <td><Link to={`/bug/:id=${id}`}>{id}</Link></td>
             <td>{title}</td>
             <td>{bugDesc}</td>
             <td>{category}</td>
