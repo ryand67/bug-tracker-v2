@@ -29,7 +29,7 @@ function App() {
           </Route>
 
           <Route exact path='/my-bugs'>
-            <MyBugs user={user} />
+            <MyBugs />
           </Route>
         </Switch>
       </Router>
