@@ -59,8 +59,8 @@ function Home() {
                     <th onClick={() => sortingQuery('title')}>Title</th>
                     <th onClick={() => sortingQuery('bugDesc')}>Description</th>
                     <th onClick={() => sortingQuery('category')}>Category</th>
-                    <th onClick={() => sortingQuery('dueDate')}>Due Date</th>
                     <th onClick={() => sortingQuery('date')}>Date Posted</th>
+                    <th onClick={() => sortingQuery('dueDate')}>Due Date</th>
                     <th onClick={() => sortingQuery('assignee')}>Assignee</th>
                     <th onClick={() => sortingQuery('status')}>Status</th>
                 </tr>

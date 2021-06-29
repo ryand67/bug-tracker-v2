@@ -10,8 +10,8 @@ function BugCard({props}) {
             <td>{title}</td>
             <td>{bugDesc}</td>
             <td>{category}</td>
-            <td>{dueDate}</td>
             <td>{date}</td>
+            <td>{dueDate}</td>
             <td>{assignee}</td>
             <td>{status}</td>
         </tr>
