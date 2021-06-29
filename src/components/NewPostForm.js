@@ -18,6 +18,7 @@ function NewPostForm() {
     const [status, setStatus] = useState('In Progress');
     const [assignee, setAssignee] = useState('Not Assigned');
     const [title, setTitle] = useState('');
+    const [id, setId] = useState();
 
     //Firestore retrieved states
     const [name, setName] = useState('');
@@ -41,12 +42,17 @@ function NewPostForm() {
         .catch(err => {
             console.log(err);
         })
+
+        db.collection('bugs').get().then(res => {
+            setId(res.docs.length)
+        })
     }, [])
 
     const handlePostSubmit = (e) => {
         e.preventDefault();
         if(dueDate && bugDesc && category && status && title) {
             db.collection('bugs').add({
+                id,
                 title,
                 dueDate,
                 bugDesc,
@@ -86,7 +92,7 @@ function NewPostForm() {
             <select name="" id="" onChange={(e) => setStatus(e.target.value)}>
                 <option value="In Progress">In Progress</option>
                 <option value="Completed">Completed</option>
-                <option value="Unassigned">Unassigned</option>
+                {/* <option value="Unassigned">Unassigned</option> */}
                 <option value="Assigned">Assigned</option>
             </select>
             <label htmlFor="">Assignee:</label>

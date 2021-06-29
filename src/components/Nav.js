@@ -22,7 +22,7 @@ function Nav() {
 }
 
 const NavBar = styled.nav`
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     padding-top: 1rem;
     display: flex;
