@@ -1,9 +1,35 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 
+import { db, auth } from '../util/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
+import BugCard from '../components/BugCard';
 
 function MyBugs() {
+
+    const [bugs, setBugs] = useState([]);
+    const [name, setName] = useState('');
+    const [user] = useAuthState(auth);
+
+    useEffect(() => {
+        if(user) {
+            db.collection('users').where('email', '==', user?.email).get().then(res => {
+                setName(res.docs[0].data().name)
+            }).then(() => {
+                let bugHolder = [];
+                db.collection('bugs').where('assignee', '==', name).get().then(res => {
+                    res.docs.forEach(bug => {
+                        bugHolder.push(bug.data());
+                    })
+                })
+                .then(() => {
+                    setBugs(bugHolder);
+                })
+            })
+        }
+    }, [])
+
     return (
         <MainTable>
             <thead>
@@ -19,7 +45,9 @@ function MyBugs() {
                 </tr>
             </thead>
             <tbody>
-
+                {bugs.map(bug => {
+                    return <BugCard key={bug.title} props={bug}/>
+                })}
             </tbody>
         </MainTable>
     )
