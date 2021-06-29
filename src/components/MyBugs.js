@@ -9,10 +9,8 @@ function MyBugs() {
 
     const [bugs, setBugs] = useState([]);
     const [name, setName] = useState('');
-    const user = auth.currentUser;
-
-    useEffect(() => {
-        console.log(user);
+    
+    auth.onAuthStateChanged(user => {
         if(user) {
             db.collection('users').where('email', '==', user?.email).get().then(res => {
                 setName(res.docs[0].data().name)
@@ -28,6 +26,10 @@ function MyBugs() {
                 })
             })
         }
+    })
+
+    useEffect(() => {
+            
     }, [])
 
     return (
