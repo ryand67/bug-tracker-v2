@@ -16,13 +16,18 @@ function Nav() {
                 <button>New Bug</button>
             </Link>
 
+            <Link to='/my-bugs'>
+                <button>My Bugs</button>
+            </Link>
+
                 <button onClick={() => auth.signOut()}>Logout</button>
         </NavBar>
     )
 }
 
 const NavBar = styled.nav`
-    /* position: fixed; */
+    position: fixed;
+    right: 0;
     top: 0;
     padding-top: 1rem;
     display: flex;

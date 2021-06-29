@@ -77,11 +77,12 @@ function Home() {
 const MainTable = styled.table`
     width: 90%;
     margin: 0 auto;
-    margin-top: 1rem;
+    margin-top: 3em;
     table-layout: fixed;
 
     th, td {
         padding: 1rem 0;
+        padding-left: .5rem;
     }
 
     th {
