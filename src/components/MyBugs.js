@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 
 import { db, auth } from '../util/firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
 
 import BugCard from '../components/BugCard';
 
@@ -10,9 +9,10 @@ function MyBugs() {
 
     const [bugs, setBugs] = useState([]);
     const [name, setName] = useState('');
-    const [user] = useAuthState(auth);
+    const user = auth.currentUser;
 
     useEffect(() => {
+        console.log(user);
         if(user) {
             db.collection('users').where('email', '==', user?.email).get().then(res => {
                 setName(res.docs[0].data().name)
