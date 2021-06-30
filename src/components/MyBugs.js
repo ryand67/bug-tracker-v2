@@ -9,30 +9,27 @@ function MyBugs() {
 
     const [bugs, setBugs] = useState([]);
     const [name, setName] = useState('');
-    const user = auth.currentUser;
-
-    useEffect(() => {
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                db.collection('users').where('email', '==', user?.email).get().then(res => {
-                    setName(res.docs[0].data().name)
-                }).then(() => {
-                    let bugHolder = [];
-                    db.collection('bugs').where('assignee', '==', name).get().then(res => {
-                        res.docs.forEach(bug => {
-                            bugHolder.push(bug.data());
-                        })
-                    })
-                    .then(() => {
-                        setBugs(bugHolder);
+    
+    auth.onAuthStateChanged(user => {
+        if(user) {
+            db.collection('users').where('email', '==', user?.email).get().then(res => {
+                setName(res.docs[0].data().name)
+            }).then(() => {
+                let bugHolder = [];
+                db.collection('bugs').where('assignee', '==', name).get().then(res => {
+                    res.docs.forEach(bug => {
+                        bugHolder.push(bug.data());
                     })
                 })
-    
-            } else {
-              // User is signed out
-              // ...
-            }
-          });
+                .then(() => {
+                    setBugs(bugHolder);
+                })
+            })
+        }
+    })
+
+    useEffect(() => {
+            
     }, [])
 
     return (
