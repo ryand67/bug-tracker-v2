@@ -12,7 +12,7 @@ function Home() {
 
     const fetchBugs = () => {
         let holder = [];
-        db.collection('bugs').get().then(res => {
+        db.collection('bugs').orderBy('id', 'asc').get().then(res => {
             res.docs.forEach(item => {
                 holder.push(item.data());
             })

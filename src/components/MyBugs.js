@@ -16,7 +16,7 @@ function MyBugs() {
                 setName(res.docs[0].data().name)
             }).then(() => {
                 let bugHolder = [];
-                db.collection('bugs').where('assignee', '==', name).get().then(res => {
+                db.collection('bugs').where('assignee', '==', name).orderBy('id', 'asc').get().then(res => {
                     res.docs.forEach(bug => {
                         bugHolder.push(bug.data());
                     })

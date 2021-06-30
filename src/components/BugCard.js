@@ -7,7 +7,7 @@ function BugCard({props}) {
 
     return (
         <tr>
-            <td><Link to={`/bug/:id=${id}`}>{id}</Link></td>
+            <td><Link to={`/bug/:id=${id}`}>#{id}</Link></td>
             <td>{title}</td>
             <td>{bugDesc}</td>
             <td>{category}</td>
