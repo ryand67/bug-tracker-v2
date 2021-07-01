@@ -44,7 +44,7 @@ function NewPostForm() {
         })
 
         db.collection('bugs').get().then(res => {
-            setId(res.docs.length)
+            setId(res.docs.length);
         })
     }, [])
 
@@ -70,7 +70,7 @@ function NewPostForm() {
                 console.log(err);
             })
         } else {
-            console.log('asdf');
+            console.log('error');
         }
     }
 

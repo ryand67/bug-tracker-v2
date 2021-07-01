@@ -26,7 +26,7 @@ function Nav() {
 }
 
 const NavBar = styled.nav`
-    position: fixed;
+    /* position: fixed; */
     right: 0;
     top: 0;
     padding-top: 1rem;
