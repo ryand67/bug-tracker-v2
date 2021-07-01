@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { db } from '../util/firebase';
 
@@ -65,7 +66,7 @@ function UpdatePage() {
     }, [])
 
     return (
-        <div>
+        <UpdatePageDiv>
             <form onSubmit={(e) => handlePostSubmit(e)}>
                 <label htmlFor="">{`#${id.substr(3)} ${title}`}</label>
                 <label>Bug Title:</label>
@@ -94,9 +95,22 @@ function UpdatePage() {
                     })}
                 </select>
                 <button type="submit" onClick={(e) => handlePostSubmit(e)}>Update Bug</button>
+                <DeleteButton><i class="fas fa-trash"></i>Delete</DeleteButton>
             </form>
-        </div>
+        </UpdatePageDiv>
     )
 }
+
+const UpdatePageDiv = styled.div`
+    margin-top: 5rem;
+`;
+
+const DeleteButton = styled.button`
+    margin: 1rem 0;
+
+    i {
+        margin-right: 1rem;
+    }
+`;
 
 export default UpdatePage
